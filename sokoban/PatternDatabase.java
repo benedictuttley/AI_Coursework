@@ -101,5 +101,6 @@ public class PatternDatabase {
 
 
 // TODO:
+
 // [1] CHECK IF STATE CHANGE IS TRANSFERRED
 // [2] ATTEMPT WITCH IN USE OF THE COPIED STATE
