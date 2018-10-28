@@ -40,7 +40,6 @@ public class PatternHeuristicAstarPlayer {
         long t1 = System.currentTimeMillis();
         List<State> path = findPathToGoal();
         System.out.println("THE STATE AFTER IS" + state);
-        System.out.println("THE FINISHED PATH IS " + path);
         long t2 = System.currentTimeMillis();
         System.out.println("Time for finding solution: " + (t2-t1));
         System.out.println("Nodes expanded: " + totalNodes);

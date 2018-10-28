@@ -43,9 +43,9 @@ public class PatternDatabase {
                 for (int col=0; col<st.getMaxY(); col++){
                     //[1] SET UP THE RELAXED STATE
                     try {
-                        this.st.setRelaxedState(row, col, st.playerX, st.playerY);
+                        this.complexStateCopy.setRelaxedState(row, col, st.playerX, st.playerY);
                         //[2] COMPUTE THE NUMBER OF STEPS TO SOLUTION
-                        sokoban.SimpleSokobanAstarPlayer player = new sokoban.SimpleSokobanAstarPlayer(st);
+                        sokoban.SimpleSokobanAstarPlayer player = new sokoban.SimpleSokobanAstarPlayer(st, false);
                         //[3] INSERT REULT INTO stepsMatrix
                         stepsMatrix[row][col] = player.findPathToGoal().size();
 
@@ -66,7 +66,8 @@ public class PatternDatabase {
         }
 
         // Replace  mutated state with copy of original complex state:
-        st = complexStateCopy;
+        //st = this.complexStateCopy;
+        System.out.println("THE COMPLEX STATE COPY IS: " + this.complexStateCopy);
         System.out.println(this.st);
 
 

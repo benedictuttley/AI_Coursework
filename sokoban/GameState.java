@@ -163,9 +163,6 @@ public class GameState implements State {
     public void setRelaxedState(int newBlockX, int newBlockY, int newPlayerX, int newPlayerY) throws Exception{
 
        // Remove current player
-        System.out.println(types[playerX][playerY]);
-        System.out.println(types[newPlayerX][newPlayerY]);
-        System.out.println(types[newBlockX][newBlockY]);
         if(types[playerX][playerY]=='p')
             types[playerX][playerY]='.';
         else if(types[playerX][playerY]=='P')
