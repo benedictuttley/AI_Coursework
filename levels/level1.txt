@@ -1,7 +1,7 @@
-wwwwwww
-wp....w
-w...b.w
-w...b.w
-ww..w.w
-wg..g.w
-wwwwwww
+........
+w....w..
+.w....w.
+..w....w
+...w.gw.
+...w.bw.
+...w..w.

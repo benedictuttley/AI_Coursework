@@ -43,22 +43,24 @@ public class PatternDatabase {
                 for (int col=0; col<st.getMaxY(); col++){
                     //[1] SET UP THE RELAXED STATE
                     try {
+                        // Currently setting player position to current player position:
+
                         this.complexStateCopy.setRelaxedState(row, col, st.playerX, st.playerY);
                         //[2] COMPUTE THE NUMBER OF STEPS TO SOLUTION
-                        sokoban.SimpleSokobanAstarPlayer player = new sokoban.SimpleSokobanAstarPlayer(st, false);
+                        sokoban.SimpleSokobanAstarPlayer player = new sokoban.SimpleSokobanAstarPlayer(complexStateCopy, false);
                         //[3] INSERT REULT INTO stepsMatrix
-                        stepsMatrix[row][col] = player.findPathToGoal().size();
+                        stepsMatrix[row][col] = (player.findPathToGoal().size()-1);
 
                     }
                     catch (Exception e) {
                         // If the relaxed state is invalid, add infinity to corresponding db entry, represent infinity as (0) in the stepsMatrix
-                        System.out.println("THIS IS AN INVALID RELAXED STATE!!");
-                        stepsMatrix[row][col] = 0;
+                        //System.out.println("THIS IS AN INVALID RELAXED STATE!!");
+                        stepsMatrix[row][col] = -1;
                     }
                 }
             }
 
-        System.out.println("Pattern Database Matrix:");
+        //System.out.println("Pattern Database Matrix:");
         for (int[] row:
              stepsMatrix) {
             System.out.println(Arrays.toString(row));
@@ -67,8 +69,8 @@ public class PatternDatabase {
 
         // Replace  mutated state with copy of original complex state:
         //st = this.complexStateCopy;
-        System.out.println("THE COMPLEX STATE COPY IS: " + this.complexStateCopy);
-        System.out.println(this.st);
+        //System.out.println("THE COMPLEX STATE COPY IS: " + this.complexStateCopy);
+       // System.out.println(this.st);
 
 
 //
@@ -95,13 +97,24 @@ public class PatternDatabase {
 
     //This is the method which you need to implement
     public int getEstimatedDistanceToGoal(List<Position> positions) {
+        //System.out.println("Position List Inputted: " + positions);
 
-      return 0;
+        int sumCost = 0;
+        for (Position position:
+             positions) {
+           sumCost += stepsMatrix[position.getX()][position.getY()];
+        }
+
+//        System.out.println("Sum steps cost = " + sumCost);
+      //Given the list of plock positions
+      // Find the sum steps cost and return it.
+
+
+
+
+
+        //System.out.println("FIND THE DISTANCE TO GOAL AND SEND IT");
+      return sumCost;
     }
 }
 
-
-// TODO:
-
-// [1] CHECK IF STATE CHANGE IS TRANSFERRED
-// [2] ATTEMPT WITCH IN USE OF THE COPIED STATE

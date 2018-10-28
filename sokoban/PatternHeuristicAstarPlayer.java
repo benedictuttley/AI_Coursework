@@ -38,8 +38,10 @@ public class PatternHeuristicAstarPlayer {
 
     public void showSolution() {
         long t1 = System.currentTimeMillis();
+
         List<State> path = findPathToGoal();
-        System.out.println("THE STATE AFTER IS" + state);
+
+
         long t2 = System.currentTimeMillis();
         System.out.println("Time for finding solution: " + (t2-t1));
         System.out.println("Nodes expanded: " + totalNodes);
@@ -57,6 +59,7 @@ public class PatternHeuristicAstarPlayer {
 
     public List<State> findPathToGoal() {
         while (!frontier.isEmpty()) {
+
             Node n = frontier.poll();             
             if (!closed.contains(n.getState())) {
                 totalNodes++;
