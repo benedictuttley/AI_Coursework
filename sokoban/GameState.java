@@ -129,6 +129,9 @@ public class GameState implements State {
     }
     
      public boolean isWall(int i,int j){
+         System.out.println(i + "," + j);
+         System.out.println(types.length);
+         System.out.println(types[0].length);
         return types[i][j] == 'w';
     }
           
@@ -163,13 +166,14 @@ public class GameState implements State {
     public void setRelaxedState(int newBlockX, int newBlockY, int newPlayerX, int newPlayerY) throws Exception{
 
        // Remove current player
+        System.out.println(types[playerX][playerY]);
         if(types[playerX][playerY]=='p')
             types[playerX][playerY]='.';
         else if(types[playerX][playerY]=='P')
             types[playerX][playerY]='g';
         else
             throw new Exception();
-        
+
         //Remove current blocks
         for (int i = 0; i < maxX; i++) {
             for (int j = 0; j < maxY; j++) {
@@ -183,6 +187,7 @@ public class GameState implements State {
         }
         
         //add new player
+        System.out.println("here");
         if(types[newPlayerX][newPlayerY]=='.'){
             types[newPlayerX][newPlayerY]='p';
         }
@@ -191,7 +196,8 @@ public class GameState implements State {
         }
         else
             throw new Exception();
-        
+
+        System.out.println("new players set");
         playerX =newPlayerX;
         playerY =newPlayerY;
         //add new block        
