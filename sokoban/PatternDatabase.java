@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static java.lang.System.exit;
 
 /**
  *
@@ -22,6 +21,7 @@ public class PatternDatabase {
     GameState st;
     int stepsMatrix[][];
     GameState complexStateCopy;
+    static int o = 0;
 
 
 
@@ -30,13 +30,9 @@ public class PatternDatabase {
         this.st = st;
         // Need to keep a copy of the complex state:
         this.complexStateCopy = new GameState(st);
-        System.out.println("x:" + st.getMaxX());
-        System.out.println("y:" + st.getMaxY());
-        //exit(0);
+
         // Matrix initialisation with dimension lengths equal to level width and height:
         this.stepsMatrix = new int[st.getMaxX()][st.getMaxY()];
-        System.out.format("Level Width is %d, level height is %d\n",st.getMaxX(), st.getMaxY());
-        System.out.println("The state is" + st);
 
         // Generate the relaxed state:
         // Let block position be i=3,j=3
@@ -54,11 +50,12 @@ public class PatternDatabase {
 
                 // Check if block move to that position is allowed:
 
-                Integer[] adjacentPositionResults = {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+                Integer[] adjacentPositionResults = {1000,1000,1000,1000};
 
                 if(((row+1) < this.complexStateCopy.getMaxX()-1) && !this.complexStateCopy.isWall(row+1, col)){
                 // Then run relaxed simulation
                 adjacentPositionResults[0] = runRelaxedSimulation(row, col, row+1, col);
+
 
                 }
 
@@ -66,11 +63,13 @@ public class PatternDatabase {
                     // Then run relaxed simulation
                     adjacentPositionResults[1] = runRelaxedSimulation(row, col, row-1, col);
 
+
                 }
 
                 if((col < this.complexStateCopy.getMaxY()-1) &&!this.complexStateCopy.isWall(row, col+1)){
                     // Then run relaxed simulation
                     adjacentPositionResults[2] = runRelaxedSimulation(row, col, row, col+1);
+
 
                 }
 
@@ -86,11 +85,10 @@ public class PatternDatabase {
 //                        //[2] COMPUTE THE NUMBER OF STEPS TO SOLUTION
 //                        sokoban.SimpleSokobanAstarPlayer player = new sokoban.SimpleSokobanAstarPlayer(complexStateCopy, false);
 //                        //[3] INSERT REULT INTO stepsMatrix
-                System.out.println("**");
-                System.out.println(Arrays.asList(adjacentPositionResults));
+
                 int pathCostForOptimalPlayerPostion = Collections.min(Arrays.asList(adjacentPositionResults));
                 stepsMatrix[row][col] = pathCostForOptimalPlayerPostion;
-                System.out.println("This has been inputted: " + pathCostForOptimalPlayerPostion);
+
             }
         }
 
@@ -138,13 +136,11 @@ public class PatternDatabase {
             // CHECK THIS...
             this.complexStateCopy.setRelaxedState(blockX, blockY, playerX, playerY);
             sokoban.SimpleSokobanAstarPlayer player = new sokoban.SimpleSokobanAstarPlayer(this.complexStateCopy, false);
-            System.out.println("THIS WAS FIRED!!");
             return player.findPathToGoal().size()-1;
 
         }
         catch (Exception e) {
             // If the relaxed state is invalid, add infinity to corresponding db entry, represent infinity as (0) in the stepsMatrix
-            System.out.println("EXCEPTION WAS THROWN ");
             return Integer.MAX_VALUE;
         }
 
@@ -155,7 +151,7 @@ public class PatternDatabase {
 
     //This is the method which you need to implement
     public int getEstimatedDistanceToGoal(List<Position> positions) {
-        //System.out.println("Position List Inputted: " + positions);
+
 
         int sumCost = 0;
         for (Position position:
@@ -163,15 +159,6 @@ public class PatternDatabase {
            sumCost += stepsMatrix[position.getX()][position.getY()];
         }
 
-//        System.out.println("Sum steps cost = " + sumCost);
-      //Given the list of plock positions
-      // Find the sum steps cost and return it.
-
-
-
-
-
-        //System.out.println("FIND THE DISTANCE TO GOAL AND SEND IT");
       return sumCost;
     }
 }

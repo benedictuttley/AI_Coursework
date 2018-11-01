@@ -14,8 +14,8 @@ public class Sokoban {
     public static void main(String[] args) throws Exception{
         GameState state = new GameState("levels/level1.txt");
 //        HumanPlayer player = new HumanPlayer(state);
-      SimpleSokobanAstarPlayer player = new SimpleSokobanAstarPlayer(state);
-       //PatternHeuristicAstarPlayer player = new PatternHeuristicAstarPlayer(state);
+     // SimpleSokobanAstarPlayer player = new SimpleSokobanAstarPlayer(state);
+       PatternHeuristicAstarPlayer player = new PatternHeuristicAstarPlayer(state);
         player.showSolution();
 
     }

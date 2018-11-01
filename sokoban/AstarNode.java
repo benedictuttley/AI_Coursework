@@ -14,6 +14,7 @@ abstract class AstarNode extends Node implements Comparable<AstarNode>{
     }
     
     public int compareTo(AstarNode n){
+
         int score = cost + getEstimatedDistanceToGoal();
         int scoreN = n.cost + n.getEstimatedDistanceToGoal();        
             return score - scoreN;

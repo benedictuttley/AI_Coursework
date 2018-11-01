@@ -47,7 +47,6 @@ public class SimpleSokobanAstarPlayer {
         System.out.println("Time: " + (t2-t1));
         System.out.println("Nodes expanded: " + totalNodes);
         System.out.println("Nodes added: " + totalNodesAdded);
-//            System.out.println("THE SOLUTION PATH" + path);
          System.out.println("Length of solution: " + (path.size()-1));
         for (State st : path) {            
             display.updateState((GameState) st);
@@ -62,7 +61,7 @@ public class SimpleSokobanAstarPlayer {
 
     public List<State> findPathToGoal() {
         while (!frontier.isEmpty()) {
-            System.out.println(totalNodes);
+
             Node n = frontier.poll();
             if (!closed.contains(n.getState())) {
                 totalNodes++;

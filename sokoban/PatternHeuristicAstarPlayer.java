@@ -58,6 +58,7 @@ public class PatternHeuristicAstarPlayer {
     }
 
     public List<State> findPathToGoal() {
+
         while (!frontier.isEmpty()) {
 
             Node n = frontier.poll();             
